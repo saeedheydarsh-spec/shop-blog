@@ -4,29 +4,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مقایسه محصولات و خرید هوشمند</title>
+    <title>مقایسه هوشمند محصولات | خرید آنلاین</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        body { font-family: Tahoma, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.8; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        h1 { color: #e63946; text-align: center; }
-        ul { list-style-type: none; padding: 0; }
-        li { margin: 15px 0; border-bottom: 1px solid #ddd; padding-bottom: 10px; }
-        li a { color: #457b9d; text-decoration: none; font-size: 1.2em; font-weight: bold; }
-        li a:hover { color: #1d3557; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Vazirmatn, Tahoma, sans-serif; background: #f0f2f5; color: #1c1e21; line-height: 1.8; }
+        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 40px; }
+        header h1 { font-size: 2.2em; margin-bottom: 10px; }
+        header p { font-size: 1.1em; opacity: 0.9; }
+        .container { max-width: 1000px; margin: auto; padding: 0 20px 40px 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; border: 1px solid #e4e6eb; }
+        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: #2a5298; }
+        .card-content { padding: 25px; text-align: center; }
+        .card-icon { font-size: 3em; margin-bottom: 15px; }
+        .card h3 { color: #1e3c72; font-size: 1.3em; margin-bottom: 10px; }
+        .card span { display: inline-block; margin-top: 15px; background: #e7f3ff; color: #1877f2; padding: 8px 15px; border-radius: 50px; font-weight: bold; font-size: 0.9em; }
     </style>
 </head>
 <body>
+    <header>
+        <h1>🛍️ بازار هوشمند</h1>
+        <p>بهترین محصولات را با تحلیل هوش مصنوعی پیدا و مقایسه کنید</p>
+    </header>
     <div class="container">
-        <h1>🎯 مقایسه محصولات و خرید هوشمند</h1>
-        <p>بهترین مقایسه‌ها را بخوانید و هوشمندانه‌تر خرید کنید.</p>
-        <ul>
-            <li><a href="گوشی_موبایل.html">📄 گوشی موبایل</a></li>
-<li><a href="تلویزیون.html">📄 تلویزیون</a></li>
-<li><a href="لوازم_آرایشی.html">📄 لوازم آرایشی</a></li>
-<li><a href="لپ_تاپ.html">📄 لپ تاپ</a></li>
-<li><a href="کفش_ورزشی.html">📄 کفش ورزشی</a></li>
-
-        </ul>
+        <div class="grid">
+            
+                <a href="گوشی_موبایل.html" class="card">
+                    <div class="card-content">
+                        <div class="card-icon">📱</div>
+                        <h3>گوشی موبایل</h3>
+                        <span>مشاهده مقایسه و خرید</span>
+                    </div>
+                </a>
+                
+                <a href="تلویزیون.html" class="card">
+                    <div class="card-content">
+                        <div class="card-icon">📺</div>
+                        <h3>تلویزیون</h3>
+                        <span>مشاهده مقایسه و خرید</span>
+                    </div>
+                </a>
+                
+                <a href="لوازم_آرایشی.html" class="card">
+                    <div class="card-content">
+                        <div class="card-icon">💄</div>
+                        <h3>لوازم آرایشی</h3>
+                        <span>مشاهده مقایسه و خرید</span>
+                    </div>
+                </a>
+                
+                <a href="لپ_تاپ.html" class="card">
+                    <div class="card-content">
+                        <div class="card-icon">💻</div>
+                        <h3>لپ تاپ</h3>
+                        <span>مشاهده مقایسه و خرید</span>
+                    </div>
+                </a>
+                
+                <a href="لوازم_خانگی.html" class="card">
+                    <div class="card-content">
+                        <div class="card-icon">🏠</div>
+                        <h3>لوازم خانگی</h3>
+                        <span>مشاهده مقایسه و خرید</span>
+                    </div>
+                </a>
+                
+        </div>
     </div>
 </body>
 </html>
