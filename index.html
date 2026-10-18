@@ -1,84 +1,258 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مقایسه هوشمند محصولات | بازار هوشمند</title>
+    <title>بازار هوشمند | خرید و مقایسه لاکچری</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: Vazirmatn, Tahoma, sans-serif; background: #f0f2f5; color: #1c1e21; line-height: 1.8; }
-        header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 40px 20px; text-align: center; border-bottom-left-radius: 30px; border-bottom-right-radius: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); margin-bottom: 40px; }
-        header h1 { font-size: 2.2em; margin-bottom: 10px; }
-        header p { font-size: 1.1em; opacity: 0.9; }
-        .container { max-width: 1000px; margin: auto; padding: 0 20px 40px 20px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
-        .card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; border: 1px solid #e4e6eb; }
-        .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: #2a5298; }
-        .card-content { padding: 25px; text-align: center; }
-        .card-icon { font-size: 3em; margin-bottom: 15px; }
-        .card h3 { color: #1e3c72; font-size: 1.3em; margin-bottom: 10px; }
-        .card span { display: inline-block; margin-top: 15px; background: #e7f3ff; color: #1877f2; padding: 8px 15px; border-radius: 50px; font-weight: bold; font-size: 0.9em; }
+        :root {
+            --bg-color: #0d0f17;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-main: #ffffff;
+            --text-muted: #a0a5b5;
+            --neon-blue: #00f3ff;
+            --neon-purple: #bc13fe;
+            --gradient: linear-gradient(135deg, var(--neon-blue), var(--neon-purple));
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Vazirmatn, sans-serif; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            background-image: radial-gradient(circle at 15% 50%, rgba(188, 19, 254, 0.15), transparent 25%),
+                              radial-gradient(circle at 85% 30%, rgba(0, 243, 255, 0.15), transparent 25%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* هدر لاکچری */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 40px;
+        }
+        header h1 {
+            font-size: 3em;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(188, 19, 254, 0.5);
+        }
+        header p { color: var(--text-muted); font-size: 1.2em; }
+
+        .container { max-width: 1200px; margin: auto; padding: 0 20px 100px 20px; }
+
+        /* بخش مقایسه */
+        .compare-section {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 50px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .compare-section h2 { text-align: center; margin-bottom: 25px; color: var(--neon-blue); }
+        .selectors { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        select {
+            width: 300px;
+            padding: 15px;
+            border-radius: 12px;
+            background: #1a1d29;
+            color: white;
+            border: 2px solid #333;
+            font-size: 1em;
+            outline: none;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        select:focus { border-color: var(--neon-purple); box-shadow: 0 0 15px rgba(188, 19, 254, 0.3); }
+        .btn-compare {
+            display: block;
+            margin: 25px auto 0 auto;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            background: var(--gradient);
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+        }
+        .btn-compare:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(188, 19, 254, 0.8); }
+
+        /* بخش پیشنهادهای ویژه */
+        .section-title { font-size: 2em; margin-bottom: 30px; border-right: 5px solid var(--neon-purple); padding-right: 15px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        
+        .card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+        .card:hover { transform: translateY(-10px); border-color: var(--neon-blue); box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2); }
+        .card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px; }
+        .card h3 { font-size: 1.1em; color: #fff; margin-bottom: 10px; height: 50px; overflow: hidden; }
+        .card .price { color: var(--neon-blue); font-weight: bold; font-size: 1.2em; margin-bottom: 15px; }
+        .btn-buy { display: block; padding: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; color: white; text-decoration: none; transition: 0.3s; font-weight: bold; }
+        .btn-buy:hover { background: var(--gradient); }
+
+        /* چت هوشمند (فروشنده مجازی) */
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.5);
+            transition: 0.3s;
+            z-index: 1000;
+        }
+        .chat-button:hover { transform: scale(1.1) rotate(10deg); }
+
+        .chat-box {
+            position: fixed;
+            bottom: 110px;
+            left: 30px;
+            width: 350px;
+            background: rgba(13, 15, 23, 0.95);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            display: none; /* در ابتدا مخفی است */
+            flex-direction: column;
+            z-index: 1000;
+        }
+        .chat-header { background: rgba(255,255,255,0.05); padding: 15px; border-radius: 20px 20px 0 0; text-align: center; font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .chat-messages { padding: 20px; height: 300px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; }
+        .msg { padding: 10px 15px; border-radius: 15px; max-width: 80%; font-size: 0.9em; }
+        .msg.ai { background: rgba(188, 19, 254, 0.2); align-self: flex-start; border-bottom-right-radius: 0; }
+        .msg.user { background: rgba(0, 243, 255, 0.2); align-self: flex-end; border-bottom-left-radius: 0; }
+        .chat-input-area { display: flex; padding: 15px; border-top: 1px solid rgba(255,255,255,0.1); }
+        .chat-input-area input { flex: 1; padding: 10px; border-radius: 10px; border: none; background: rgba(255,255,255,0.1); color: white; outline: none; margin-left: 10px; }
+        .chat-input-area button { padding: 10px 20px; background: var(--neon-blue); border: none; border-radius: 10px; font-weight: bold; cursor: pointer; color: #000; }
     </style>
 </head>
 <body>
+
     <header>
-        <h1>🛍️ بازار هوشمند</h1>
-        <p>بهترین محصولات را با تحلیل هوش مصنوعی پیدا و مقایسه کنید</p>
+        <h1>بازار هوشمند</h1>
+        <p>خرید لاکچری، مقایسه هوشمند، مشاوره با هوش مصنوعی</p>
     </header>
+
     <div class="container">
+        <!-- بخش مقایسه -->
+        <div class="compare-section">
+            <h2>⚖️ مقایسه هوشمند محصولات</h2>
+            <div class="selectors">
+                <select>
+                    <option>انتخاب محصول اول...</option>
+                    <option>سامسونگ گلکسی A17</option>
+                    <option>شیائومی ردمی نوت ۱۲</option>
+                    <option>آیفون ۱۳</option>
+                </select>
+                <select>
+                    <option>انتخاب محصول دوم...</option>
+                    <option>سامسونگ گلکسی A07</option>
+                    <option>شیائومی پوکو X5</option>
+                    <option>آیفون ۱۴</option>
+                </select>
+            </div>
+            <button class="btn-compare">مقایسه کن</button>
+        </div>
+
+        <!-- بخش پیشنهادهای شگفت‌انگیز -->
+        <h2 class="section-title">🔥 پیشنهادهای شگفت‌انگیز (تخفیف‌دار)</h2>
         <div class="grid">
-            
-                <a href="گوشی_موبایل.html" class="card">
-                    <div class="card-content">
-                        <div class="card-icon">📱</div>
-                        <h3>گوشی موبایل</h3>
-                        <span>مشاهده مقایسه و خرید</span>
-                    </div>
-                </a>
-                
-                <a href="تلویزیون.html" class="card">
-                    <div class="card-content">
-                        <div class="card-icon">📺</div>
-                        <h3>تلویزیون</h3>
-                        <span>مشاهده مقایسه و خرید</span>
-                    </div>
-                </a>
-                
-                <a href="لوازم_آرایشی.html" class="card">
-                    <div class="card-content">
-                        <div class="card-icon">💄</div>
-                        <h3>لوازم آرایشی</h3>
-                        <span>مشاهده مقایسه و خرید</span>
-                    </div>
-                </a>
-                
-                <a href="کرم_ضد_آفتاب.html" class="card">
-                    <div class="card-content">
-                        <div class="card-icon">🧴</div>
-                        <h3>کرم ضد آفتاب</h3>
-                        <span>مشاهده مقایسه و خرید</span>
-                    </div>
-                </a>
-                
-                <a href="هدفون_و_هندزفری.html" class="card">
-                    <div class="card-content">
-                        <div class="card-icon">🎧</div>
-                        <h3>هدفون و هندزفری</h3>
-                        <span>مشاهده مقایسه و خرید</span>
-                    </div>
-                </a>
-                
-                <a href="لپ_تاپ.html" class="card">
-                    <div class="card-content">
-                        <div class="card-icon">💻</div>
-                        <h3>لپ تاپ</h3>
-                        <span>مشاهده مقایسه و خرید</span>
-                    </div>
-                </a>
-                
+            <!-- کارت نمونه ۱ -->
+            <div class="card">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/4c9899d5a6f67d4924d3bb6d174482f06562c70c_1701382582.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80" alt="گوشی">
+                <h3>گوشی موبایل سامسونگ Galaxy A17</h3>
+                <div class="price">۵,۹۹۹,۰۰۰ تومان</div>
+                <a href="#" class="btn-buy">خرید از دیجی‌کالا</a>
+            </div>
+            <!-- کارت نمونه ۲ -->
+            <div class="card">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/5d9c2524b7fc27252bdb678cebd23dfe9fa4236d_1708444217.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80" alt="گوشی">
+                <h3>گوشی موبایل سامسونگ Galaxy A07</h3>
+                <div class="price">۴,۱۸۰,۰۰۰ تومان</div>
+                <a href="#" class="btn-buy">خرید از دیجی‌کالا</a>
+            </div>
+            <!-- کارت نمونه ۳ -->
+            <div class="card">
+                <img src="https://dkstatics-public.digikala.com/digikala-products/48679c2ccd4374eb5fc2c388c9cf6fbff23cc659_1640944792.jpg?x-oss-process=image/resize,m_lfit,h_300,w_300/quality,q_80" alt="هدفون">
+                <h3>هدفون بی‌سیم سونی</h3>
+                <div class="price">۲,۵۰۰,۰۰۰ تومان</div>
+                <a href="#" class="btn-buy">خرید از دیجی‌کالا</a>
+            </div>
         </div>
     </div>
+
+    <!-- دکمه چت هوشمند -->
+    <div class="chat-button" onclick="toggleChat()">🤖</div>
+
+    <!-- باکس چت هوشمند -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-header">مشاور خرید هوشمند</div>
+        <div class="chat-messages" id="chatMessages">
+            <div class="msg ai">سلام! من مشاور خرید شما هستم. درباره هر محصولی سوال داری بپرس تا راهنماییت کنم.</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" placeholder="سوالت را بنویس..." id="chatInput" onkeypress="handleEnter(event)">
+            <button onclick="sendMessage()">ارسال</button>
+        </div>
+    </div>
+
+    <script>
+        // اسکریپت باز و بسته کردن چت
+        function toggleChat() {
+            const box = document.getElementById('chatBox');
+            box.style.display = (box.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        // اسکریپت ارسال پیام (فعلاً نمایشی)
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if(text === '') return;
+
+            const messages = document.getElementById('chatMessages');
+            
+            // پیام کاربر
+            messages.innerHTML += `<div class="msg user">${text}</div>`;
+            input.value = '';
+
+            // پاسخ فیک هوش مصنوعی (بعداً به API وصل میشه)
+            setTimeout(() => {
+                messages.innerHTML += `<div class="msg ai">این یک پاسخ آزمایشی است. به زودی به هوش مصنوعی واقعی وصل می‌شوم!</div>`;
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000);
+        }
+
+        function handleEnter(e) {
+            if(e.key === 'Enter') sendMessage();
+        }
+    </script>
 </body>
 </html>
